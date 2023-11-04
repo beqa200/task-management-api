@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAllBoards = exports.editBoard = exports.createBoard = void 0;
 var _boardModel = _interopRequireDefault(require("../models/boardModel"));
+var _slugify = _interopRequireDefault(require("slugify"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const getAllBoards = async (_req, res) => {
   const boards = await _boardModel.default.find();
@@ -44,7 +45,12 @@ const editBoard = async (req, res) => {
   try {
     const board = await _boardModel.default.findOneAndReplace({
       _id: req.params.id
-    }, req.body, {
+    }, {
+      ...req.body,
+      slug: (0, _slugify.default)(req.body.name, {
+        lower: true
+      })
+    }, {
       new: true,
       runValidators: true
     });

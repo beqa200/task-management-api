@@ -6,7 +6,7 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 var _process$env$DATABASE;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 _dotenv.default.config({
-  path: './config.env'
+  path: './local.env'
 });
 if (!process.env.DATABASE_URL || !process.env.DATABASE_PASSWORD) {
   throw new Error('Database URL or Database password is not defined in environment variables!');

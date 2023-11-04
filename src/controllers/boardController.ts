@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Board from "../models/boardModel";
+import slugify from "slugify";
 
 const getAllBoards = async (_req: Request, res: Response) => {
   const boards = await Board.find();
@@ -33,11 +34,9 @@ const editBoard = async (req: Request, res: Response) => {
   try {
     const board = await Board.findOneAndReplace(
       { _id: req.params.id },
-      req.body,
-      { new: true, runValidators: true },
-      
+      { ...req.body, slug: slugify(req.body.name, { lower: true }) },
+      { new: true, runValidators: true }
     );
-
     res.status(201).json({
       message: "Boards successfuly edited",
       data: board,
