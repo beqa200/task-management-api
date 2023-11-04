@@ -14,9 +14,17 @@ const DB_URL = process.env.DATABASE_URL?.replace(
   process.env.DATABASE_PASSWORD
 );
 
+// process.on('uncaughtException', (err, origin) => {
+//   //code to log the errors
+//   console.log(
+//      `Caught exception: ${err}\n` +
+//      `Exception origin: ${origin}`,
+//    );
+//  });
+
 try {
   DB_URL &&
-    mongoose.connect(DB_URL).then((con) => {
+    mongoose.connect(DB_URL).then((_con) => {
       // console.log(con.connections);
       console.log('Database connected!');
     });

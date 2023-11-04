@@ -5,5 +5,4 @@ const router = Router()
 router.route("/").get(getAllBoards).post(createBoard);
 router.route("/:id").put(editBoard);
 
-
 export default router;

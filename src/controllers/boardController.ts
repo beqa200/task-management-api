@@ -1,22 +1,21 @@
 import { Request, Response } from "express";
 import Board from "../models/boardModel";
-import slugify from "slugify";
 
-const getAllBoards = async (req: Request, res: Response) => {
+const getAllBoards = async (_req: Request, res: Response) => {
   const boards = await Board.find();
   res.status(200).json({ data: boards });
 };
 
 const createBoard = async (req: Request, res: Response) => {
- const {name, columns} = req.body
+  const { name, columns } = req.body;
+
   try {
     const newBoard = new Board({
-        name,
-        columns: columns.map((item: string) => {
-          return { name: item, tasks: [] };
-        }),
-      });
-      console.log(newBoard);
+      name,
+      columns: columns.map((item: string) => {
+        return { name: item };
+      }),
+    });
     await newBoard.save();
     res.status(201).json({
       message: "Boards successfuly created",
@@ -35,9 +34,9 @@ const editBoard = async (req: Request, res: Response) => {
     const board = await Board.findOneAndReplace(
       { _id: req.params.id },
       req.body,
-      { runValidators: false }
+      { new: true, runValidators: true },
+      
     );
-    console.log(board);
 
     res.status(201).json({
       message: "Boards successfuly edited",

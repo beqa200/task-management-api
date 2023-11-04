@@ -1,6 +1,7 @@
-import express, { Request, Response } from "express"
+import express from "express"
 import boardRouter from "./routes/boardRoutes"
 import morgan from "morgan"
+
 const app = express();
 
 if(process.env.NODE_ENV == "development") {
@@ -8,7 +9,6 @@ if(process.env.NODE_ENV == "development") {
 }
 
 app.use(express.json());
-console.log(process.env.NODE_ENV)
 app.use("/api/v1/boards", boardRouter)
 
 
