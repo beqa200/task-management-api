@@ -49,4 +49,20 @@ const editBoard = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllBoards, createBoard, editBoard };
+const editSubTask = async (req: Request, res: Response) => {
+  
+  try {
+    
+    const board = await Board.findById(req.params.id);
+    res.status(201).json({
+      message: "Boards successfuly edited",
+      data: board,
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: "error",
+      error: err,
+    });
+  }
+};
+export { getAllBoards, createBoard, editBoard, editSubTask };

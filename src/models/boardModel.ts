@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import slugify from "slugify";
 
 const subtaskSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   title: {
     type: String,
     required: true,
-    minLength: 1
   },
-  isCompleted: { type: Boolean, default: false },
+  isCompleted: { type: Boolean, default:false },
 });
 
 const taskSchema = new mongoose.Schema({
@@ -22,7 +22,7 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  subTasks: [subtaskSchema],
+  subtasks: [subtaskSchema],
 });
 
 const columnSchema = new mongoose.Schema({

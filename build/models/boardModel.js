@@ -8,10 +8,10 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 var _slugify = _interopRequireDefault(require("slugify"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const subtaskSchema = new _mongoose.default.Schema({
+  _id: _mongoose.default.Schema.Types.ObjectId,
   title: {
     type: String,
-    required: true,
-    minLength: 1
+    required: true
   },
   isCompleted: {
     type: Boolean,
@@ -30,7 +30,7 @@ const taskSchema = new _mongoose.default.Schema({
     type: String,
     required: true
   },
-  subTasks: [subtaskSchema]
+  subtasks: [subtaskSchema]
 });
 const columnSchema = new _mongoose.default.Schema({
   name: {

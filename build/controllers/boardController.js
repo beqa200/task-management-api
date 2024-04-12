@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAllBoards = exports.editBoard = exports.createBoard = void 0;
+exports.getAllBoards = exports.editSubTask = exports.editBoard = exports.createBoard = void 0;
 var _boardModel = _interopRequireDefault(require("../models/boardModel"));
 var _slugify = _interopRequireDefault(require("slugify"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -66,3 +66,18 @@ const editBoard = async (req, res) => {
   }
 };
 exports.editBoard = editBoard;
+const editSubTask = async (req, res) => {
+  try {
+    const board = await _boardModel.default.findById(req.params.id);
+    res.status(201).json({
+      message: "Boards successfuly edited",
+      data: board
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: "error",
+      error: err
+    });
+  }
+};
+exports.editSubTask = editSubTask;
